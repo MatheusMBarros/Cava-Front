@@ -1,0 +1,104 @@
+/* Estilo para o título */
+.mold-quantity-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilo para os filtros */
+.date-filter,
+.mold-filter {
+  margin-bottom: 10px;
+}
+
+/* Estilo para os rótulos dos filtros */
+label {
+  display: block;
+  font-weight: bold;
+}
+
+/* Estilo para os campos de entrada */
+input[type="date"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Estilo para a tabela */
+.mold-quantity-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilo para o cabeçalho da tabela */
+.mold-quantity-header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Estilo para as células da tabela */
+.mold-quantity-date,
+.mold-quantity-quantity {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo para as linhas alternadas da tabela */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para a classe "buttonsClass" */
+.buttonsClass {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo para o botão de filtro */
+.filter {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+/* Estilo para o botão de exportação para CSV */
+.export-csv {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+/* Estilo para o botão de exportação para PDF */
+.export-pdf {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Estilo para os botões ao passar o mouse sobre eles */
+.filter:hover,
+.export-csv:hover,
+.export-pdf:hover {
+  opacity: 0.8;
+}
+

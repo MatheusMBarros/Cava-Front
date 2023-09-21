@@ -1,0 +1,71 @@
+/* LoginPage.css */
+
+/* Container principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ajuste a altura conforme necessário */
+  background-color: #f0f0f0; /* Cor de fundo */
+}
+
+/* Título */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff; /* Cor de fundo do formulário */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Grupo de entrada (rótulo + campo de entrada) */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Rótulo */
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Campo de entrada de texto */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Botão de login */
+.loginButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #007bff; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.loginButton:hover {
+  background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+}

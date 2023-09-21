@@ -1,0 +1,66 @@
+/* MenuStyle.css */
+
+.top-menu {
+  background-color: rgba(255, 255, 255, 0.885);
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+.buttons {
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+}
+
+.menu-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 1px 2px;
+  font-size: 36px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.menu-button > a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu-button:hover {
+  background-color: #004599;
+}
+
+
+.menu-button p {
+  margin: 0;
+  font-size: 8px;
+}
+.mold{
+  position: relative;
+  top: 10px;
+  color: white;
+  font-size: 35px;
+  
+}
+
+
+.cog{
+  position: relative;
+  top: -16px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: -20px;
+  
+}
+
