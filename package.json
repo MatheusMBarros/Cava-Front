@@ -10,6 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^4.0.1",
+    "axios": "^1.5.0",
+    "concurrently": "^8.2.0",
     "csv-writer": "^1.6.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.6.0",
@@ -17,17 +23,9 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@vitejs/plugin-react": "^4.0.1",
-    "concurrently": "^8.2.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0"
-  },
-  "devDependencies": {
-   
+    "vite": "^4.4.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }

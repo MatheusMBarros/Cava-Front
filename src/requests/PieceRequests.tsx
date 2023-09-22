@@ -1,6 +1,9 @@
 import axios from "axios";
-import { Piece } from "../../../backend/src/Entities/Piece";
-import { CreatePieceType, UpdatePieceType } from "../types/PieceType";
+import {
+	CreatePieceType,
+	ListPieceType,
+	UpdatePieceType,
+} from "../types/PieceType";
 
 const url = "https://cavawebservicetest.onrender.com//piece";
 export const createPiece = async ({
@@ -26,10 +29,10 @@ export const createPiece = async ({
 	}
 };
 
-export async function fetchPiece(): Promise<Piece[]> {
+export async function fetchPiece(): Promise<ListPieceType[]> {
 	try {
 		const response = await axios.get(url);
-		return response.data as Piece[];
+		return response.data as ListPieceType[];
 	} catch (error: any) {
 		console.log(error);
 		throw new Error();
@@ -60,10 +63,10 @@ export const editPiece = async ({
 	}
 };
 
-export const findPiece = async (id: number): Promise<Piece> => {
+export const findPiece = async (id: number): Promise<ListPieceType> => {
 	try {
 		const response = await axios.get(`${url}/${id}`);
-		return response.data as Piece;
+		return response.data as ListPieceType;
 	} catch (error: any) {
 		console.log(error);
 		throw new Error();

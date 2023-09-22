@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Mold } from "../../../backend/src/Entities/Mold";
 import {
 	CreateMoldType,
 	ListMoldType,
+	MoldType,
 	UpdatedMoldType,
 } from "../types/MoldType";
 
@@ -36,10 +36,10 @@ export async function fetchMold(): Promise<ListMoldType[]> {
 		throw new Error("Failed to fetch molds.");
 	}
 }
-export async function findMold(id: number): Promise<Mold> {
+export async function findMold(id: number): Promise<MoldType> {
 	try {
 		const response = await axios.get(`${url}/${id}`);
-		return response.data as Mold;
+		return response.data as MoldType;
 	} catch (error: any) {
 		console.error(error);
 		throw new Error("Failed to fetch mold.");

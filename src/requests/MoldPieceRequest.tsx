@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-	UpdateMoldPiece,
 	CreateMoldPieceType,
 	ListMoldPieceType,
 } from "../types/MoldPieceType";
