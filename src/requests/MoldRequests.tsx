@@ -6,7 +6,7 @@ import {
 	UpdatedMoldType,
 } from "../types/MoldType";
 
-const url = "http://localhost:3333/mold";
+const url = "https://cavawebservicetest.onrender.com//mold";
 
 export const createMold = async ({
 	name,

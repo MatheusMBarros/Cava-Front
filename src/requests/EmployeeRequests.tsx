@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CreateEmployeeType, UpdateEmployeeType } from "../types/EmployeeType";
 
-const url = "http://localhost:3333/employee";
+const url = "https://cavawebservicetest.onrender.com/employee";
 
 export const createEmployee = async ({
 	name,

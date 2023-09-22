@@ -2,7 +2,7 @@ import axios from "axios";
 import { Piece } from "../../../backend/src/Entities/Piece";
 import { CreatePieceType, UpdatePieceType } from "../types/PieceType";
 
-const url = "http://localhost:3333/piece";
+const url = "https://cavawebservicetest.onrender.com//piece";
 export const createPiece = async ({
 	name,
 	handle_type,
