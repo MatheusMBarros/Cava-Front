@@ -124,6 +124,16 @@ function MoldQuantityPerProductionOrder() {
 		setFiltersVisible(!filtersVisible);
 	};
 
+	const calculatePieceNames = (productionOrder) => {
+		const moldPieceData = moldPieces[productionOrder.mold_fk];
+		if (moldPieceData && moldPieceData.length > 0) {
+			return moldPieceData
+				.map((moldPiece) => pieceNames[moldPiece.piece_fk])
+				.join(", ");
+		}
+		return "";
+	};
+
 	const handleExportCsvClick = () => {
 		if (filteredProductionOrders && filteredProductionOrders.length > 0) {
 			// Mapeie os dados no formato que o PapaParse espera (array de arrays)
@@ -132,6 +142,7 @@ function MoldQuantityPerProductionOrder() {
 					formatDate(productionOrder.created_at),
 					productionOrder.mold_name,
 					productionOrder.quantity.toString(),
+					calculatePieceNames(productionOrder), // Adicione o nome das peças aqui
 					productionOrder.pieces.toString(),
 				];
 			});
@@ -142,7 +153,7 @@ function MoldQuantityPerProductionOrder() {
 				"Molde",
 				"Quantidade de moldes",
 				"Peças",
-				"Total de Peças",
+				"Total de PeçasT",
 			]);
 
 			// Use o PapaParse para converter os dados em uma string CSV
