@@ -6,13 +6,7 @@ export default defineConfig({
 	plugins: [react(), { name: "@vitejs/plugin-react" }],
 	build: {
 		rollupOptions: {
-			external: [
-				"react/jsx-runtime",
-				"react",
-				"react-dom",
-				"react-router-dom",
-				"react-router",
-			],
+			external: ["react", "react-dom", "react-router-dom", "react-router"],
 		},
 	},
 });
