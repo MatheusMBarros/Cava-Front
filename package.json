@@ -2,10 +2,9 @@
   "name": "frontend",
   "version": "0.0.0",
   "type": "module",
-
   "scripts": {
     "start": "vite",
-    "runAll" : "npx http-server ./dist",
+    "runAll": "npx http-server ./dist",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -16,17 +15,12 @@
     "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^4.0.1",
     "axios": "^1.5.0",
-    "concurrently": "^8.2.0",
-    "csv-writer": "^1.6.0",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.6.0",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "vite": "^4.4.0"
   }
 }

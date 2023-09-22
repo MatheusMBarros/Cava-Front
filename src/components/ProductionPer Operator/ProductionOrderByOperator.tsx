@@ -6,7 +6,7 @@ import {
 import { ListProductionOrderType } from "../../types/ProductionOrderTypes";
 import { FaFilter, FaFileCsv, FaFilePdf } from "react-icons/fa";
 import "./ProductionByOperatorStyle.css"; // Certifique-se de ter um arquivo CSS apropriado
-import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
+import Papa from "papaparse";
 
 // Função para formatar a data no formato "dd/mm/aaaa"
 function formatDate(date) {
@@ -73,24 +73,36 @@ function ProductionByOperator() {
 
 	const handleExportCsvClick = () => {
 		if (filteredProductionOrders && filteredProductionOrders.length > 0) {
-			const csvWriter = createCsvWriter({
-				path: "production_by_operator.csv", // Nome do arquivo CSV
-				header: [
-					{ id: "created_at", title: "Data" },
-					{ id: "operator", title: "Operador" },
-					{ id: "quantity", title: "Quantidade" },
-				], // Defina os cabeçalhos das colunas
+			console.log(filteredProductionOrders);
+
+			const formattedDate = formatDate(new Date()); // Obtenha a data formatada
+
+			const csvData = Papa.unparse({
+				fields: ["created_at", "operator", "quantity"], // Cabeçalhos das colunas
+				data: filteredProductionOrders.map((order) => ({
+					created_at: formatDate(order.created_at),
+					operator: order.employee_name,
+					quantity: order.quantity,
+				})),
 			});
 
-			csvWriter.writeRecords(filteredProductionOrders).then(() => {
-				const downloadLink = document.createElement("a");
-				downloadLink.href = "production_by_operator.csv";
-				downloadLink.download = "production_by_operator.csv";
-				downloadLink.click();
-			});
+			const csvBlob = new Blob([csvData], { type: "text/csv" });
+			const csvUrl = URL.createObjectURL(csvBlob);
+
+			const downloadLink = document.createElement("a");
+			downloadLink.href = csvUrl;
+
+			// Use o formato de nome com a data no final
+			downloadLink.download = `production_by_operator_${formattedDate}.csv`;
+
+			downloadLink.click();
+
+			// Lembre-se de revogar a URL quando não for mais necessária
+			URL.revokeObjectURL(csvUrl);
+		} else {
+			console.error("filteredProductionOrders está indefinido ou vazio.");
 		}
 	};
-
 	const handleExportPdfClick = () => {};
 
 	const filteredProductionOrders = productionOrders?.filter(

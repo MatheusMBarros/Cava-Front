@@ -8,8 +8,9 @@ import ProductionByOperator from "../../../components/ProductionPer Operator/Pro
 function ReportsDashboard() {
 	return (
 		<>
+			<Menu />
+
 			<div className="dashboard">
-				<Menu />
 				<AluminiumLoss />
 				<MoldQuantityPerProductionOrder />
 				<ProductionByOperator />

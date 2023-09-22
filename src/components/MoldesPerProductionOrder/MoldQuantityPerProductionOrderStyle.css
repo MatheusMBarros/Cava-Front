@@ -30,6 +30,7 @@ select {
 .mold-quantity-table {
   width: 100%;
   border-collapse: collapse;
+  ;
 }
 
 /* Estilo para o cabeçalho da tabela */
@@ -100,5 +101,15 @@ tr:nth-child(even) {
 .export-csv:hover,
 .export-pdf:hover {
   opacity: 0.8;
+}
+
+.mold-quantity-container{
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 

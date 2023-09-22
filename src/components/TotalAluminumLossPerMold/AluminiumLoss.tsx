@@ -27,7 +27,7 @@ function AluminiumLoss() {
 
 	return (
 		<>
-			<h2 className="aluminium-loss-subtitle">Aluminio Perdido por Molde</h2>
+			<h2 className="aluminium-loss-subtitle">Alumínio perdido por molde</h2>
 			<table className="aluminium-loss-table">
 				<thead>
 					<tr>

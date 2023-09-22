@@ -6,13 +6,11 @@ import {
 import { ListProductionOrderType } from "../../types/ProductionOrderTypes";
 import { FaFilter, FaFileCsv, FaFilePdf } from "react-icons/fa";
 import "./MoldQuantityPerProductionOrderStyle.css";
-import { createObjectCsvWriter as createCsvWriter } from "csv-writer";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import { fetchMoldPiece } from "../../requests/MoldPieceRequest";
 import { findMoldName } from "../../requests/MoldRequests";
 import { getPieceName } from "../../requests/PieceRequests";
 import { ListMoldPieceType } from "../../types/MoldPieceType";
+import Papa from "papaparse";
 
 function MoldQuantityPerProductionOrder() {
 	const [productionOrders, setProductionOrders] = useState<
@@ -128,22 +126,50 @@ function MoldQuantityPerProductionOrder() {
 
 	const handleExportCsvClick = () => {
 		if (filteredProductionOrders && filteredProductionOrders.length > 0) {
-			const csvWriter = createCsvWriter({
-				path: "production_orders.csv",
-				header: [
-					{ id: "created_at", title: "Data" },
-					{ id: "mold_name", title: "Molde" },
-					{ id: "quantity", title: "Quantidade" },
-					{ id: "pieces", title: "Peças" },
-				],
+			// Mapeie os dados no formato que o PapaParse espera (array de arrays)
+			const csvData = filteredProductionOrders.map((productionOrder) => {
+				return [
+					formatDate(productionOrder.created_at),
+					productionOrder.mold_name,
+					productionOrder.quantity.toString(),
+					productionOrder.pieces.toString(),
+				];
 			});
 
-			csvWriter.writeRecords(filteredProductionOrders).then(() => {
-				const downloadLink = document.createElement("a");
-				downloadLink.href = "production_orders.csv";
-				downloadLink.download = "production_orders.csv";
-				downloadLink.click();
-			});
+			// Adicione um cabeçalho ao CSV
+			csvData.unshift([
+				"Data",
+				"Molde",
+				"Quantidade de moldes",
+				"Peças",
+				"Total de Peças",
+			]);
+
+			// Use o PapaParse para converter os dados em uma string CSV
+			const csv = Papa.unparse(csvData);
+
+			// Crie um Blob com os dados CSV
+			const csvBlob = new Blob([csv], { type: "text/csv" });
+
+			// Crie uma data formatada para adicionar ao nome do arquivo
+			const formattedDate = formatDate(new Date());
+
+			// Crie o nome do arquivo com a data
+			const filename = `molds_production_order_${formattedDate}.csv`;
+
+			// Crie uma URL para o Blob
+			const csvUrl = URL.createObjectURL(csvBlob);
+
+			// Crie um elemento <a> para o download do arquivo
+			const downloadLink = document.createElement("a");
+			downloadLink.href = csvUrl;
+			downloadLink.download = filename;
+			downloadLink.click();
+
+			// Revogue a URL quando não for mais necessária
+			URL.revokeObjectURL(csvUrl);
+		} else {
+			console.error("filteredProductionOrders está indefinido ou vazio.");
 		}
 	};
 
@@ -195,7 +221,7 @@ function MoldQuantityPerProductionOrder() {
 	return (
 		<div className="mold-quantity-container">
 			<h2 className="mold-quantity-title">
-				Quantidade de Moldes por Ordem de Produção
+				Quantidade de Moldes e Peças por Ordem de Produção
 			</h2>
 
 			<div className="buttonsClass">
@@ -254,17 +280,18 @@ function MoldQuantityPerProductionOrder() {
 			<table className="mold-quantity-table">
 				<thead>
 					<tr>
+						<th className="mold-quantity-header">Id</th>
 						<th className="mold-quantity-header">Data</th>
 						<th className="mold-quantity-header">Molde</th>
-						<th className="mold-quantity-header">Quantidade de moldes</th>
+						<th className="mold-quantity-header">Quantidade de Moldes</th>
 						<th className="mold-quantity-header">Peças</th>
-
 						<th className="mold-quantity-header">Total de Peças</th>
 					</tr>
 				</thead>
 				<tbody>
 					{filteredProductionOrders?.map((productionOrder, index) => (
 						<tr key={index}>
+							<td className="mold-quantity-id">{productionOrder.id}</td>
 							<td className="mold-quantity-date">
 								{formatDate(productionOrder.created_at)}
 							</td>
