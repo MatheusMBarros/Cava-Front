@@ -1,7 +1,5 @@
-import { Piece } from "../../../backend/src/Entities/Piece";
-
 export type UpdateMoldPiece = {
-	pieces: Piece[];
+	pieces: [];
 	id: number;
 	mold_fk: number;
 	piece_fk: number;
@@ -15,7 +13,7 @@ export type CreateMoldPieceType = {
 };
 
 export type ListMoldPieceType = {
-	pieces: Piece[];
+	pieces: [];
 	id: number;
 	mold_fk: number;
 	piece_fk: number;
