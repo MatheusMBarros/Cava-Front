@@ -45,7 +45,7 @@ const MoldEnrollment: React.FC = () => {
 			<br />
 
 			<div className="formBox">
-				<form onSubmit={handleSubmit}>
+				<div>
 					<label>
 						Nome do Molde:
 						<input
@@ -95,10 +95,9 @@ const MoldEnrollment: React.FC = () => {
 							disabled={true}
 						/>
 					</label>
-
-					<button type="submit">Criar Molde</button>
+					<button onClick={handleSubmit}>Criar Molde</button>
 					<br />
-				</form>
+				</div>
 			</div>
 		</>
 	);

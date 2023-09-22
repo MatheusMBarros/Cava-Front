@@ -22,6 +22,7 @@ import EditMoldPiece from "./pages/Admin/MoldPieceActions/EditMoldPiece/EditMold
 import EmployeesPages from "./pages/EmployeesPages/EmployeesPages";
 import ProductionOrder from "./pages/Molding/Molding";
 import Error403 from "./err/403/Error403";
+import EditProductionOrder from "./pages/Admin/ProductionOrderActions/EditProductionOrder/EdtiProductionOrder";
 
 function App() {
 	return (
@@ -61,6 +62,7 @@ function App() {
 					path="/productionOrdersActions"
 					element={<ListDeleteProductionOrders />}
 				/>
+				<AdminRoute path= "productionOrder/:id" element={<EditProductionOrder />} />
 				<AdminRoute path="/report" element={<ReportsDashboard />} />
 
 				<MoldingRoute path="/productionOrder" element={<ProductionOrder />} />

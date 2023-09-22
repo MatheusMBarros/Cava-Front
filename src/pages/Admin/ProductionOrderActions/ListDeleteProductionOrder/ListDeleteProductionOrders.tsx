@@ -109,12 +109,8 @@ function ListDeleteProductionOrders() {
 									<td>{productionOrder.id}</td>
 									<td>{productionOrder.initial_counter}</td>
 									<td>{productionOrder.final_counter}</td>
-									<td>
-										{formatDateTime(new Date(productionOrder.created_at))}
-									</td>
-									<td>
-										{formatDateTime(new Date(productionOrder.updated_at))}
-									</td>
+									<td>{formatDateTime(productionOrder.created_at)}</td>
+									<td>{formatDateTime(productionOrder.updated_at)}</td>
 									<td>{productionOrder.quantity}</td>
 									<td>{moldNames[productionOrder.mold_fk]}</td>
 									<td>{employeeNames[productionOrder.employee_fk]}</td>
