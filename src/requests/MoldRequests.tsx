@@ -6,7 +6,7 @@ import {
 	UpdatedMoldType,
 } from "../types/MoldType";
 
-const url = "https://cavawebservicetest.onrender.com//mold";
+const url = "https://cavawebservicetest.onrender.com/mold";
 
 export const createMold = async ({
 	name,
@@ -30,6 +30,7 @@ export const createMold = async ({
 export async function fetchMold(): Promise<ListMoldType[]> {
 	try {
 		const response = await axios.get(url);
+		console.log(response.data);
 		return response.data as ListMoldType[];
 	} catch (error: any) {
 		console.error(error);

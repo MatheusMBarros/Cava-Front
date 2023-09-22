@@ -1,10 +1,7 @@
 import axios from "axios";
-import {
-	CreateMoldPieceType,
-	ListMoldPieceType,
-} from "../types/MoldPieceType";
+import { CreateMoldPieceType, ListMoldPieceType } from "../types/MoldPieceType";
 
-const url = "https://cavawebservicetest.onrender.com//moldPiece";
+const url = "https://cavawebservicetest.onrender.com/moldPiece";
 
 export async function createMoldPiece({
 	mold_fk,

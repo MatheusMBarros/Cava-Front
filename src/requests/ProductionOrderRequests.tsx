@@ -6,8 +6,8 @@ import {
 	LastProductionOrderType,
 } from "../types/ProductionOrderTypes";
 
-const url = "https://cavawebservicetest.onrender.com//productionOrder";
-const lastOrderUrl = "https://cavawebservicetest.onrender.com//lastOrder";
+const url = "https://cavawebservicetest.onrender.com/productionOrder";
+const lastOrderUrl = "https://cavawebservicetest.onrender.com/lastOrder";
 
 export const createProductionOrder = async ({
 	initial_counter,
