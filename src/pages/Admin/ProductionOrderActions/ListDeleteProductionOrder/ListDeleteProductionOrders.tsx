@@ -73,7 +73,7 @@ function ListDeleteProductionOrders() {
 		const year = date.getFullYear();
 		const month = (date.getMonth() + 1).toString().padStart(2, "0");
 		const day = date.getDate().toString().padStart(2, "0");
-		const hours = (date.getHours() + 3).toString().padStart(2, "0");
+		const hours = date.getHours().toString().padStart(2, "0");
 		const minutes = date.getMinutes().toString().padStart(2, "0");
 		return `${day}/${month}/${year} - ${hours}:${minutes}`;
 	};
@@ -109,8 +109,12 @@ function ListDeleteProductionOrders() {
 									<td>{productionOrder.id}</td>
 									<td>{productionOrder.initial_counter}</td>
 									<td>{productionOrder.final_counter}</td>
-									<td>{formatDateTime(productionOrder.created_at)}</td>
-									<td>{formatDateTime(productionOrder.updated_at)}</td>
+									<td>
+										{formatDateTime(new Date(productionOrder.created_at))}
+									</td>
+									<td>
+										{formatDateTime(new Date(productionOrder.updated_at))}
+									</td>
 									<td>{productionOrder.quantity}</td>
 									<td>{moldNames[productionOrder.mold_fk]}</td>
 									<td>{employeeNames[productionOrder.employee_fk]}</td>
