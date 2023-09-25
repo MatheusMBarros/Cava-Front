@@ -103,7 +103,6 @@ function ProductionByOperator() {
 			console.error("filteredProductionOrders está indefinido ou vazio.");
 		}
 	};
-	const handleExportPdfClick = () => {};
 
 	const filteredProductionOrders = productionOrders?.filter(
 		(productionOrder) => {
@@ -135,10 +134,10 @@ function ProductionByOperator() {
 				<button className="export-csv" onClick={handleExportCsvClick}>
 					<FaFileCsv /> Exportar para CSV
 				</button>
-
+				{/* 
 				<button className="export-pdf" onClick={handleExportPdfClick}>
 					<FaFilePdf /> Exportar para PDF
-				</button>
+				</button> */}
 			</div>
 
 			{filtersVisible && (

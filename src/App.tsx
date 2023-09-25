@@ -62,7 +62,7 @@ function App() {
 					path="/productionOrdersActions"
 					element={<ListDeleteProductionOrders />}
 				/>
-				<AdminRoute path= "productionOrder/:id" element={<EditProductionOrder />} />
+				<AdminRoute path= "/productionOrder/:id" element={<EditProductionOrder />} />
 				<AdminRoute path="/report" element={<ReportsDashboard />} />
 
 				<MoldingRoute path="/productionOrder" element={<ProductionOrder />} />

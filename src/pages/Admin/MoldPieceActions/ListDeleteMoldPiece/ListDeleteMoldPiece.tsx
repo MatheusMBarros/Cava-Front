@@ -78,7 +78,7 @@ function ListDeleteMoldPieces() {
 		if (confirm === true) {
 			console.log(`Excluir relação de molde e peça com ID ${id}`);
 			deleteMoldPiece(id);
-			navigate("/moldPiece");
+			fetchData();
 		}
 	}
 

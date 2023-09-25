@@ -65,9 +65,9 @@ function ListDeleteProductionOrders() {
 		}
 	};
 
-	const handleEdit = (id: number) => {
-		navigate(`productionOrder/${id}`);
-	};
+	function handleEdit(id: number): void {
+		navigate(`/productionOrder/${id}`);
+	}
 
 	const formatDateTime = (date) => {
 		const year = date.getFullYear();

@@ -54,7 +54,7 @@ function EditMold() {
 					<div>
 						<label htmlFor="total_weight">Peso Total:</label>
 						<input
-							type="text"
+							type="number"
 							id="total_weight"
 							name="total_weight"
 							value={mold ? mold.total_weight : ""}
@@ -68,12 +68,28 @@ function EditMold() {
 							Retorno de Canal (Kg):
 						</label>
 						<input
-							type="text"
+							type="number"
 							id="channel_return_weight"
 							name="channel_return_weight"
 							value={mold ? mold.channel_return_weight : ""}
 							onChange={(e) =>
 								setMold({ ...mold, channel_return_weight: e.target.value })
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor="channel_lost_percentage">Perda de Canal:</label>
+						<input
+							type="number"
+							id="channel_lost_percentage"
+							name="channel_lost_percentage"
+							value={mold ? mold.channel_lost_percentage : ""}
+							onChange={(e) =>
+								setMold({
+									...mold,
+									channel_lost_percentage: Number(e.target.value),
+								})
 							}
 						/>
 					</div>

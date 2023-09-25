@@ -126,3 +126,14 @@ select {
   font-size: 15px;
   font-weight: bold;
 }
+
+
+.backButton{
+  background-color: gray;
+  color: white;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 2px;
+}

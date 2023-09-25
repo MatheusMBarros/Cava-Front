@@ -63,7 +63,6 @@ function ListDeletePieces() {
 
 	function handleEditPiece(id: number): void {
 		navigate(`/piece/${id}`);
-		;
 	}
 
 	return (

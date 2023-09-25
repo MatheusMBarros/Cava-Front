@@ -59,21 +59,26 @@ function EditPiece() {
 
 					<div>
 						<label htmlFor="handle_type">Tipo de cabo:</label>
-						<input
-							type="text"
+						<select
 							id="handle_type"
 							name="handle_type"
 							value={piece ? piece.handle_type : ""}
 							onChange={(e) =>
 								setPiece({ ...piece, handle_type: e.target.value })
-							}
-						/>
+							}>
+							<option value=" " disabled>
+								Selecione...
+							</option>
+							<option value="SA">Sem Alça</option>
+							<option value="AM">Alça de Madeira</option>
+							<option value="FF">Alça Ferro Fundido</option>
+						</select>
 					</div>
 
 					<div>
 						<label htmlFor="size">Tamanho:</label>
 						<input
-							type="text"
+							type="number"
 							id="size"
 							name="size"
 							value={piece ? piece.size : ""}
@@ -84,9 +89,9 @@ function EditPiece() {
 					</div>
 
 					<div>
-						<label htmlFor="gross_weight">Peso Bruto:</label>
+						<label htmlFor="gross_weight">Peso Bruto (Kg):</label>
 						<input
-							type="text"
+							type="number"
 							id="gross_weight"
 							name="gross_weight"
 							value={piece ? piece.gross_weight : ""}
@@ -97,14 +102,30 @@ function EditPiece() {
 					</div>
 
 					<div>
-						<label htmlFor="net_weight">Peso Líquido:</label>
+						<label htmlFor="net_weight">Peso Líquido(Kg):</label>
 						<input
-							type="text"
+							type="number"
 							id="net_weight"
 							name="net_weight"
 							value={piece ? piece.net_weight : ""}
 							onChange={(e) =>
 								setPiece({ ...piece, net_weight: Number(e.target.value) })
+							}
+						/>
+					</div>
+
+					<div>
+						<label htmlFor="splinter_lost_percentage">Perda de Cavaco:</label>
+						<input
+							type="number"
+							id="splinter_lost_percentage"
+							name="splinter_lost_percentage"
+							value={piece ? piece.splinter_lost_percentage : ""}
+							onChange={(e) =>
+								setPiece({
+									...piece,
+									splinter_lost_percentage: Number(e.target.value),
+								})
 							}
 						/>
 					</div>
