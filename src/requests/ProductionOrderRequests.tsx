@@ -128,6 +128,8 @@ export const fetchProductionOrderById = async (id: number) => {
 			employee_name: employeeData.name,
 			description: productionOrderData.description,
 			date: "",
+			total_aluminium_loss:
+				productionOrderData.quantity * moldData.mold_aluminium_loss,
 		};
 
 		return finalData;
