@@ -6,11 +6,15 @@ import {
 import { ListProductionOrderType } from "../../types/ProductionOrderTypes";
 import { FaFilter, FaFileCsv, FaFilePdf } from "react-icons/fa";
 import "./MoldQuantityPerProductionOrderStyle.css";
-import { fetchMoldPiece } from "../../requests/MoldPieceRequest";
+import {
+	fetchMoldPiece,
+	totalAluminiumLossPerMold,
+} from "../../requests/MoldPieceRequest";
 import { findMoldName } from "../../requests/MoldRequests";
 import { getPieceName } from "../../requests/PieceRequests";
 import { ListMoldPieceType } from "../../types/MoldPieceType";
 import Papa from "papaparse";
+import jsPDF from "jspdf";
 
 function MoldQuantityPerProductionOrder() {
 	const [productionOrders, setProductionOrders] = useState<
@@ -47,6 +51,15 @@ function MoldQuantityPerProductionOrder() {
 				const productionOrderDetail = await fetchProductionOrderById(
 					productionOrderId.id
 				);
+
+				// Calcula o total de perda de alumínio para o molde deste pedido de produção
+				const totalAluminiumLoss = await totalAluminiumLossPerMold(
+					productionOrderDetail.mold_fk
+				);
+
+				// Adiciona o total de perda de alumínio ao objeto de detalhes do pedido de produção
+				productionOrderDetail.total_aluminium_loss = totalAluminiumLoss;
+
 				return productionOrderDetail;
 			})
 		);
@@ -184,9 +197,71 @@ function MoldQuantityPerProductionOrder() {
 		}
 	};
 
-	const handleExportPdfClick = () => {};
+	// ...
 
-	const filteredProductionOrders = productionOrders
+	const handleExportPdfClick = () => {
+		if (filteredProductionOrders && filteredProductionOrders.length > 0) {
+			// Crie um novo objeto PDF
+			const pdf = new jsPDF();
+
+			// Defina a posição inicial para começar a adicionar conteúdo ao PDF
+			let yPos = 10;
+
+			// Adicione um título ao PDF
+			pdf.text("Relatório de Produção de Moldes", 10, yPos);
+			yPos += 10;
+
+			// Itere sobre as produções filtradas e adicione informações ao PDF
+			filteredProductionOrders.forEach((productionOrder, index) => {
+				pdf.text(`ID: ${productionOrder.id}`, 10, yPos);
+				pdf.text(
+					`Data: ${formatDate(productionOrder.created_at)}`,
+					10,
+					yPos + 10
+				);
+				pdf.text(`Molde: ${productionOrder.mold_name}`, 10, yPos + 20);
+				pdf.text(
+					`Quantidade de Moldes: ${productionOrder.quantity}`,
+					10,
+					yPos + 30
+				);
+				pdf.text(`Peças:`, 10, yPos + 40);
+
+				// Adicione informações sobre as peças associadas a este pedido de produção
+				yPos += 50;
+				moldPieces[productionOrder.mold_fk]?.forEach(
+					(moldPiece, pieceIndex) => {
+						pdf.text(
+							`${pieceNames[moldPiece.piece_fk]} - ${productionOrder.quantity}`,
+							20,
+							yPos
+						);
+						yPos += 10;
+					}
+				);
+
+				pdf.text(`Total de Peças: ${productionOrder.pieces}`, 10, yPos);
+				yPos += 20;
+
+				// Adicione uma quebra de página se não for a última produção
+				if (index < filteredProductionOrders.length - 1) {
+					pdf.addPage();
+					yPos = 10;
+				}
+			});
+
+			// Gere o nome do arquivo com base na data atual
+			const formattedDate = formatDate(new Date());
+			const filename = `molds_production_order_${formattedDate}.pdf`;
+
+			// Inicie o download do PDF
+			pdf.save(filename);
+		} else {
+			console.error("filteredProductionOrders está indefinido ou vazio.");
+		}
+	};
+
+	const filteredProductionOrders: any = productionOrders
 		?.map((productionOrder) => {
 			// Função para calcular o total de peças
 			const calculateTotalPieces = () => {
@@ -297,6 +372,7 @@ function MoldQuantityPerProductionOrder() {
 						<th className="mold-quantity-header">Quantidade de Moldes</th>
 						<th className="mold-quantity-header">Peças</th>
 						<th className="mold-quantity-header">Total de Peças</th>
+						<th className="mold-quantity-header">Total de alumínio perdido</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -309,7 +385,6 @@ function MoldQuantityPerProductionOrder() {
 							<td className="mold-quantity-quantity">
 								{productionOrder.mold_name}
 							</td>
-
 							<td>{productionOrder.quantity}</td>
 							<td>
 								{moldPieces[productionOrder.mold_fk]?.map(
@@ -322,6 +397,11 @@ function MoldQuantityPerProductionOrder() {
 								)}
 							</td>
 							<td>{productionOrder.pieces}</td>
+							<td>
+								{productionOrder.total_aluminium_loss *
+									productionOrder.quantity}
+								{" Kg"}
+							</td>
 						</tr>
 					))}
 				</tbody>

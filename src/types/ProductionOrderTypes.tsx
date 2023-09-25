@@ -30,6 +30,7 @@ export type ListProductionOrderType = {
 	employee_name: string;
 	mold_name: string;
 	description: string;
+	total_aluminium_loss: number;
 };
 
 export type LastProductionOrderType = {
