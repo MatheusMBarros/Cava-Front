@@ -6,8 +6,8 @@ import {
 	LastProductionOrderType,
 } from "../types/ProductionOrderTypes";
 
-const url = "https://cavawebservicetest.onrender.com/productionOrder";
-const lastOrderUrl = "https://cavawebservicetest.onrender.com/lastOrder";
+const url = "http://localhost:10000/productionOrder";
+const lastOrderUrl = "http://localhost:10000/lastOrder";
 
 export const createProductionOrder = async ({
 	initial_counter,
@@ -106,10 +106,10 @@ export const fetchProductionOrderById = async (id: number) => {
 		const { mold_fk, employee_fk } = productionOrderData;
 
 		const moldResponse = await axios.get(
-			`https://cavawebservicetest.onrender.com/mold/${mold_fk}`
+			`http://localhost:10000/mold/${mold_fk}`
 		);
 		const employeeResponse = await axios.get(
-			`https://cavawebservicetest.onrender.com/employee/${employee_fk}`
+			`http://localhost:10000/employee/${employee_fk}`
 		);
 
 		const moldData = moldResponse.data;

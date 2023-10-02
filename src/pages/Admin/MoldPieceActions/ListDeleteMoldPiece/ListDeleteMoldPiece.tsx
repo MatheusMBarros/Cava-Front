@@ -76,7 +76,7 @@ function ListDeleteMoldPieces() {
 			"Tem certeza que deseja desvincular esta peça do molde?"
 		);
 		if (confirm === true) {
-			console.log(`Excluir relação de molde e peça com ID ${id}`);
+	
 			deleteMoldPiece(id);
 			fetchData();
 		}

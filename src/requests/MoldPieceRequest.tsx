@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CreateMoldPieceType, ListMoldPieceType } from "../types/MoldPieceType";
 
-const url = "https://cavawebservicetest.onrender.com/moldPiece";
+const url = "http://localhost:10000/moldPiece";
 
 export async function createMoldPiece({
 	mold_fk,
@@ -93,10 +93,8 @@ export const totalAluminiumLossPerMold = async (
 ): Promise<number> => {
 	try {
 		const response = await axios.get(
-			`https://cavawebservicetest.onrender.com/aluminiumLoss/${mold_fk}`
+			`http://localhost:10000/aluminiumLoss/${mold_fk}`
 		);
-		console.log(response.data);
-
 		return response.data;
 	} catch (error: any) {
 		console.error(error);

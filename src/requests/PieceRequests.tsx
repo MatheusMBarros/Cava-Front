@@ -5,7 +5,7 @@ import {
 	UpdatePieceType,
 } from "../types/PieceType";
 
-const url = "https://cavawebservicetest.onrender.com/piece";
+const url = "http://localhost:10000/piece";
 export const createPiece = async ({
 	name,
 	handle_type,
