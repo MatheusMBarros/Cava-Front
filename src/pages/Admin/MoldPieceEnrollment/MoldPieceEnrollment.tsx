@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createMoldPiece } from "../../../requests/MoldPieceRequest";
-import BackButton from "../../../components/BackButton/BackButton";
 import { fetchMold } from "../../../requests/MoldRequests";
 import { fetchPiece } from "../../../requests/PieceRequests";
 import Menu from "../../../components/Menu/Menu";

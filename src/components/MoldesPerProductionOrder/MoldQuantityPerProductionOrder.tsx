@@ -29,6 +29,8 @@ function MoldQuantityPerProductionOrder() {
 	}>({});
 	const [moldNames, setMoldNames] = useState<{ [key: number]: string }>({});
 	const [pieceNames, setPieceNames] = useState<{ [key: number]: string }>({});
+	const [filteredStartDate, setFilteredStartDate] = useState<Date | null>(null); // <-- Add this line
+	const [filteredEndDate, setFilteredEndDate] = useState<Date | null>(null); // <-- Add this line
 
 	useEffect(() => {
 		populateProductionOrders().catch((error) => console.log(error));
@@ -51,12 +53,12 @@ function MoldQuantityPerProductionOrder() {
 					productionOrderId.id
 				);
 
-				// Calcula o total de perda de alumínio para o molde deste pedido de produção
+				// Calculate the total aluminum loss for the mold of this production order
 				const totalAluminiumLoss = await totalAluminiumLossPerMold(
 					productionOrderDetail.mold_fk
 				);
 
-				// Adiciona o total de perda de alumínio ao objeto de detalhes do pedido de produção
+				// Add the total aluminum loss to the production order details object
 				productionOrderDetail.total_aluminium_loss = totalAluminiumLoss;
 
 				return productionOrderDetail;
@@ -112,7 +114,7 @@ function MoldQuantityPerProductionOrder() {
 			// Set the grouped and sorted moldPieces in state
 			setMoldPieces(moldPiecesByMold);
 		} catch (error) {
-			console.error("Erro ao buscar as relações de Moldes e Peças:", error);
+			console.error("Error fetching Mold-Piece relations:", error);
 		}
 	};
 
@@ -148,13 +150,13 @@ function MoldQuantityPerProductionOrder() {
 
 	const handleExportCsvClick = () => {
 		if (filteredProductionOrders && filteredProductionOrders.length > 0) {
-			// Mapeie os dados no formato que o PapaParse espera (array de arrays)
+			// Map the data in the format PapaParse expects (array of arrays)
 			const csvData = filteredProductionOrders.map((productionOrder) => {
 				return [
 					formatDate(productionOrder.created_at),
 					productionOrder.mold_name,
 					productionOrder.quantity.toString(),
-					calculatePieceNames(productionOrder), // Adicione o nome das peças aqui
+					calculatePieceNames(productionOrder), // Add piece names here
 					productionOrder.pieces.toString(),
 					(
 						productionOrder.total_aluminium_loss * productionOrder.quantity
@@ -162,41 +164,41 @@ function MoldQuantityPerProductionOrder() {
 				];
 			});
 
-			// Adicione um cabeçalho ao CSV
+			// Add a header to the CSV
 			csvData.unshift([
 				"Data",
 				"Molde",
 				"Quantidade de moldes",
 				"Peças",
-				"Total de PeçasT",
+				"Total de Peças",
 				"Total de alumínio perdido",
 			]);
 
-			// Use o PapaParse para converter os dados em uma string CSV
+			// Use PapaParse to convert the data into a CSV string
 			const csv = Papa.unparse(csvData);
 
-			// Crie um Blob com os dados CSV
+			// Create a Blob with the CSV data
 			const csvBlob = new Blob([csv], { type: "text/csv" });
 
-			// Crie uma data formatada para adicionar ao nome do arquivo
+			// Create a formatted date to add to the file name
 			const formattedDate = formatDate(new Date());
 
-			// Crie o nome do arquivo com a data
+			// Create the file name with the date
 			const filename = `molds_production_order_${formattedDate}.csv`;
 
-			// Crie uma URL para o Blob
+			// Create a URL for the Blob
 			const csvUrl = URL.createObjectURL(csvBlob);
 
-			// Crie um elemento <a> para o download do arquivo
+			// Create an <a> element for downloading the file
 			const downloadLink = document.createElement("a");
 			downloadLink.href = csvUrl;
 			downloadLink.download = filename;
 			downloadLink.click();
 
-			// Revogue a URL quando não for mais necessária
+			// Revoke the URL when no longer needed
 			URL.revokeObjectURL(csvUrl);
 		} else {
-			console.error("filteredProductionOrders está indefinido ou vazio.");
+			console.error("filteredProductionOrders is undefined or empty.");
 		}
 	};
 
@@ -206,20 +208,20 @@ function MoldQuantityPerProductionOrder() {
 
 	const filteredProductionOrders: any = productionOrders
 		?.map((productionOrder) => {
-			// Função para calcular o total de peças
+			// Function to calculate the total pieces
 			const calculateTotalPieces = () => {
 				const moldPieceData = moldPieces[productionOrder.mold_fk];
 				if (moldPieceData && moldPieceData.length > 0) {
-					// Verificar se todas as cavidades têm a mesma peça
+					// Check if all cavities have the same piece
 					const isAllCavitiesSamePiece = moldPieceData.every(
 						(piece, index, array) => piece.piece_fk === array[0].piece_fk
 					);
 
 					if (isAllCavitiesSamePiece) {
-						// Todas as cavidades têm a mesma peça, multiplicar pela quantidade de cavidades
+						// All cavities have the same piece, multiply by the number of cavities
 						return productionOrder.quantity * moldPieceData.length;
 					} else {
-						// As cavidades têm peças diferentes, calcular quantas peças foram produzidas
+						// Cavities have different pieces, calculate how many pieces were produced
 						return moldPieceData.reduce(
 							(total, piece) => total + productionOrder.quantity,
 							0
@@ -261,10 +263,6 @@ function MoldQuantityPerProductionOrder() {
 				<button className="export-csv" onClick={handleExportCsvClick}>
 					<FaFileCsv /> Exportar para CSV
 				</button>
-
-				{/* <button className="export-pdf" onClick={handleExportPdfClick}>
-					<FaFilePdf /> Exportar para PDF
-				</button> */}
 			</div>
 
 			{filtersVisible && (
@@ -274,7 +272,7 @@ function MoldQuantityPerProductionOrder() {
 						<input
 							type="date"
 							id="startDate"
-							value={startDate ? formatDate(startDate) : ""}
+							value={filteredStartDate ? formatDate(filteredStartDate) : ""}
 							onChange={handleStartDateChange}
 						/>
 					</div>
@@ -284,7 +282,7 @@ function MoldQuantityPerProductionOrder() {
 						<input
 							type="date"
 							id="endDate"
-							value={endDate ? formatDate(endDate) : ""}
+							value={filteredEndDate ? formatDate(filteredEndDate) : ""}
 							onChange={handleEndDateChange}
 						/>
 					</div>

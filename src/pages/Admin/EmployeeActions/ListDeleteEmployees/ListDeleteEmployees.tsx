@@ -14,7 +14,7 @@ function ListDeleteEmployees() {
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [employees]);
 
 	const fetchData = async () => {
 		try {
@@ -33,7 +33,7 @@ function ListDeleteEmployees() {
 			if (confirm === true) {
 				try {
 					deleteEmployee(funcionarioId);
-					fetchData();
+					setEmployees(employees);
 				} catch (error: any) {
 					alert(error);
 				}

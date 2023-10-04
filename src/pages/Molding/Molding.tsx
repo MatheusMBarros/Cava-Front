@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./MoldingStyle.css";
-import BackButton from "../../components/BackButton/BackButton";
 import { fetchMold } from "../../requests/MoldRequests";
 import { fetchEmployee } from "../../requests/EmployeeRequests";
 import {
@@ -34,8 +33,6 @@ const ProductionOrder: React.FC = () => {
 	const populateSelectors = async () => {
 		const molds = await fetchMold();
 		setMolds(molds);
-
-		// Busque apenas funcionários com o setor 'molding'
 		const allEmployees = await fetchEmployee();
 		const moldingEmployees = allEmployees.filter(
 			(employee) => employee.sector === "molding"
@@ -105,7 +102,7 @@ const ProductionOrder: React.FC = () => {
 		const year = date.getFullYear();
 		const month = (date.getMonth() + 1).toString().padStart(2, "0");
 		const day = date.getDate().toString().padStart(2, "0");
-		const hours = (date.getHours() - 3).toString().padStart(2, "0");
+		const hours = date.getHours().toString().padStart(2, "0");
 		const minutes = date.getMinutes().toString().padStart(2, "0");
 		return `${year}-${month}-${day}T${hours}:${minutes}`;
 	};
