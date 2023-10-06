@@ -79,7 +79,7 @@ export const fetchMoldPieceByMoldId = async (
 ): Promise<ListMoldPieceType[]> => {
 	try {
 		const response = await axios.get(
-			`https://cavawebservicetest.onrender.com/moldParts/${mold_fk}`
+			`http://localhost:10000/moldParts/${mold_fk}`
 		);
 		return response.data as ListMoldPieceType[];
 	} catch (error: any) {

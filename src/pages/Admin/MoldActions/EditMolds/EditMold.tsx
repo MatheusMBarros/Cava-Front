@@ -79,16 +79,18 @@ function EditMold() {
 					</div>
 
 					<div>
-						<label htmlFor="channel_lost_percentage">Perda de Canal:</label>
+						<label htmlFor="channel_lost_percentage">Perda de Canal(%):</label>
 						<input
 							type="number"
 							id="channel_lost_percentage"
 							name="channel_lost_percentage"
-							value={mold ? mold.channel_lost_percentage : ""}
+							value={
+								mold ? (mold.channel_lost_percentage * 100).toFixed(0) : ""
+							}
 							onChange={(e) =>
 								setMold({
 									...mold,
-									channel_lost_percentage: Number(e.target.value),
+									channel_lost_percentage: Number(e.target.value) / 100,
 								})
 							}
 						/>

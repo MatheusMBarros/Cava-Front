@@ -76,9 +76,9 @@ function ListDeleteMoldPieces() {
 			"Tem certeza que deseja desvincular esta peça do molde?"
 		);
 		if (confirm === true) {
-	
 			deleteMoldPiece(id);
 			fetchData();
+			navigate("/moldPiece");
 		}
 	}
 
@@ -98,42 +98,37 @@ function ListDeleteMoldPieces() {
 					<tbody>
 						{Object.keys(moldPieces)
 							.sort((a, b) => Number(a) - Number(b)) // Sort moldFk numerically
-							.map(
-								(moldFk) => (
-									console.log(moldFk),
-									(
-										<tr key={moldFk}>
-											<td>{moldNames[moldFk]}</td>
-											<td>
-												{moldPieces[moldFk].map((moldPiece) => (
-													<p key={moldPiece.id}>
-														{pieceNames[moldPiece.piece_fk]} - Cavidade{" "}
-														{moldPiece.cavity}
-													</p>
-												))}
-											</td>
+							.map((moldFk) => (
+								<tr key={moldFk}>
+									<td>{moldNames[moldFk]}</td>
+									<td>
+										{moldPieces[moldFk].map((moldPiece) => (
+											<p key={moldPiece.id}>
+												{pieceNames[moldPiece.piece_fk]} - Cavidade{" "}
+												{moldPiece.cavity}
+											</p>
+										))}
+									</td>
 
-											<td className="actionsCell">
+									<td className="actionsCell">
+										<button
+											className="edit-button"
+											onClick={() => handleEdit(Number(moldFk))}>
+											Editar
+										</button>
+										{moldPieces[moldFk].map((moldPiece) => (
+											<div key={moldPiece.id}>
 												<button
-													className="edit-button"
-													onClick={() => handleEdit(Number(moldFk))}>
-													Editar
+													className="delete-button"
+													onClick={() => handleDelete(moldPiece.id)}>
+													Desvincular {pieceNames[moldPiece.piece_fk]} da
+													Cavidade {moldPiece.cavity}
 												</button>
-												{moldPieces[moldFk].map((moldPiece) => (
-													<div key={moldPiece.id}>
-														<button
-															className="delete-button"
-															onClick={() => handleDelete(moldPiece.id)}>
-															Desvincular {pieceNames[moldPiece.piece_fk]} da
-															Cavidade {moldPiece.cavity}
-														</button>
-													</div>
-												))}
-											</td>
-										</tr>
-									)
-								)
-							)}
+											</div>
+										))}
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</table>
 			</div>

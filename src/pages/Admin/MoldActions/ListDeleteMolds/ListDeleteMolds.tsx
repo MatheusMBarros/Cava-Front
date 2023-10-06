@@ -130,7 +130,7 @@ function ListDeleteMolds() {
 									<td>{mold.name}</td>
 									<td>{mold.total_weight} Kg</td>
 									<td>{mold.channel_return_weight} Kg</td>
-									<td>{mold.mold_aluminium_loss.toFixed(3)}</td>
+									<td>{mold.mold_aluminium_loss.toFixed(3)}Kg</td>
 
 									<td>
 										<div className="listDeleteMoldActionsCell">

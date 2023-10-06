@@ -115,16 +115,20 @@ function EditPiece() {
 					</div>
 
 					<div>
-						<label htmlFor="splinter_lost_percentage">Perda de Cavaco:</label>
+						<label htmlFor="splinter_lost_percentage">
+							Perda de Cavaco(%):
+						</label>
 						<input
 							type="number"
 							id="splinter_lost_percentage"
 							name="splinter_lost_percentage"
-							value={piece ? piece.splinter_lost_percentage : ""}
+							value={
+								piece ? (piece.splinter_lost_percentage * 100).toFixed(0) : ""
+							}
 							onChange={(e) =>
 								setPiece({
 									...piece,
-									splinter_lost_percentage: Number(e.target.value),
+									splinter_lost_percentage: Number(e.target.value) / 100,
 								})
 							}
 						/>
