@@ -10,7 +10,7 @@ interface AdminRouteProps {
 function AdminRoute({ element, path }: AdminRouteProps) {
 	const { user } = useAuth();
 
-	if (user && user.sector === "admin") {
+	if (user && user.sector === "Administrativo") {
 		return (
 			<>
 				<Routes>

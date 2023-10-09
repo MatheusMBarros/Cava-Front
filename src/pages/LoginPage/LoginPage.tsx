@@ -22,7 +22,7 @@ function LoginPage() {
 			authenticatedUser.id === Number(id)
 		) {
 			login(authenticatedUser);
-			if (authenticatedUser.sector === "admin") {
+			if (authenticatedUser.sector === "Administrativo") {
 				navigate("/report");
 			} else if (authenticatedUser.sector === "molding") {
 				navigate("/productionOrder");
