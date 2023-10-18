@@ -24,7 +24,7 @@ function LoginPage() {
 			login(authenticatedUser);
 			if (authenticatedUser.sector === "Administrativo") {
 				navigate("/report");
-			} else if (authenticatedUser.sector === "molding") {
+			} else if (authenticatedUser.sector === "Moldagem") {
 				navigate("/productionOrder");
 			}
 

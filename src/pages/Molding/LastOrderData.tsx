@@ -14,13 +14,17 @@ const LastOrderData: React.FC = () => {
 		const lastOrderData = await fetchLastOrder();
 		setLastOrderData(lastOrderData);
 	};
-	const formatDateTime = (date) => {
+
+	const formatDateTime = (dateTime) => {
+		const date = new Date(dateTime);
 		const year = date.getFullYear();
-		const month = date.getMonth().toString().padStart(2, "0");
-		const day = date.getDate().toString().padStart(2, "0");
-		const hours = (date.getHours() + 3).toString().padStart(2, "0");
-		const minutes = date.getMinutes().toString().padStart(2, "0");
-		return `${day}/${month}/${year} - ${hours}:${minutes}`;
+		const month = String(date.getMonth() + 1).padStart(2, "0");
+		const day = String(date.getDate()).padStart(2, "0");
+		const hours = String(date.getHours() + 3).padStart(2, "0");
+		const minutes = String(date.getMinutes()).padStart(2, "0");
+		const seconds = String(date.getSeconds()).padStart(2, "0");
+
+		return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 	};
 
 	return (
@@ -65,13 +69,14 @@ const LastOrderData: React.FC = () => {
 						disabled
 					/>
 					<label htmlFor="createdAt">Data de Criação</label>
+					<label htmlFor="createdAt">Data de Criação</label>
 					<input
 						type="text"
 						name="createdAt"
 						id="createdAt"
 						value={
 							lastOrderData?.created_at
-								? formatDateTime(new Date(lastOrderData?.created_at))
+								? formatDateTime(lastOrderData.created_at)
 								: ""
 						}
 						disabled

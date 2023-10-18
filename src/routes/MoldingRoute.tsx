@@ -11,7 +11,7 @@ interface AdminRouteProps {
 function MoldingRoute({ element, path }: AdminRouteProps) {
 	const { user } = useAuth();
 
-	if (user && user.sector === "molding") {
+	if (user && user.sector === "Moldagem") {
 		return (
 			<>
 				<Routes>

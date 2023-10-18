@@ -35,7 +35,7 @@ const ProductionOrder: React.FC = () => {
 		setMolds(molds);
 		const allEmployees = await fetchEmployee();
 		const moldingEmployees = allEmployees.filter(
-			(employee) => employee.sector === "molding"
+			(employee) => employee.sector === "Moldagem"
 		);
 		setEmployees(moldingEmployees);
 	};
@@ -55,7 +55,7 @@ const ProductionOrder: React.FC = () => {
 	};
 
 	const openOrderValidation = () => {
-		setCreatedAt(new Date());
+		setCreatedAt(new Date(-3));
 		setMoldId(mold_fk);
 		setEmployeeFk(employee_fk);
 		setInitialCounter(initial_counter);
@@ -100,7 +100,7 @@ const ProductionOrder: React.FC = () => {
 
 	const formatDateTime = (date: Date) => {
 		const year = date.getFullYear();
-		const month = (date.getMonth() + 1).toString().padStart(2, "0");
+		const month = date.getMonth().toString().padStart(2, "0");
 		const day = date.getDate().toString().padStart(2, "0");
 		const hours = date.getHours().toString().padStart(2, "0");
 		const minutes = date.getMinutes().toString().padStart(2, "0");
