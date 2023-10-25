@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function LogoutButton() {
 	const navigate = useNavigate();
 	const logout = () => {
-		localStorage.clear();
 		alert("Você foi deslogado");
 		navigate("/login");
 	};

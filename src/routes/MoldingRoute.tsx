@@ -1,7 +1,6 @@
 import React from "react";
-import { Route, Navigate, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useAuth } from "../pages/LoginPage/AuthContext";
-import ProductionOrder from "../pages/Molding/Molding";
 
 interface AdminRouteProps {
 	element: React.ReactNode;

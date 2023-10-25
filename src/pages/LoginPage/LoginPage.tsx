@@ -23,9 +23,9 @@ function LoginPage() {
 		) {
 			login(authenticatedUser);
 			if (authenticatedUser.sector === "Administrativo") {
-				navigate("/report");
+				navigate("/employee");
 			} else if (authenticatedUser.sector === "Moldagem") {
-				navigate("/productionOrder");
+				navigate("/createProductionOrder");
 			}
 
 			alert("Welcome back, " + authenticatedUser.name + "!");

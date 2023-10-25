@@ -1,7 +1,6 @@
 
 *{
   padding: 0 auto ;
-  margin: 0 auto;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
@@ -68,6 +67,7 @@ select {
 
 
 .formBox{
+  margin: 0 auto;
   max-width: 400px;
   padding: 20px;
   border: 1px solid #ccc;

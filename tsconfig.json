@@ -1,24 +1,22 @@
 {
-  "compilerOptions": {
-    "types": ["vite/client"],
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    
+	"compilerOptions": {
+		"types": ["vite/client"],
+		"target": "ES2020",
+		"useDefineForClassFields": true,
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "allowImportingTsExtensions": true, 
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react",
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "react"
+	},
+	"include": ["src", "vite.config.ts", ".eslintrc.cjs"],
+	"exclude": ["node_modules", "dist", "build"],
 
-  },
-  "include": ["src", "vite.config.ts",".eslintrc.cjs"],
-  "exclude": ["node_modules", "dist", "build"],
-
-  "references": [{ "path": "./tsconfig.node.json" }]
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

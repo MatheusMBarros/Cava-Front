@@ -1,0 +1,18 @@
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.employeeForm{
+  width: 20%;
+  margin-left: 80px;
+
+}
+
