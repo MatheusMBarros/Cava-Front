@@ -17,80 +17,31 @@ const Menu = () => {
 		<div className="top-menu">
 			<nav>
 				<div className="buttons">
-					<button
-						className="menu-button"
-						onClick={() => navigate("/employeeEnrollment")}>
+					<button className="menu-button" onClick={() => navigate("/employee")}>
 						<AiOutlineUserAdd />
-						<p>Criar funcionário</p>
+						<p>Funcionário</p>
 					</button>
 
-					<button
-						className="menu-button"
-						onClick={() => navigate("/moldEnrollment")}>
+					<button className="menu-button" onClick={() => navigate("/mold")}>
 						<PiCookingPotDuotone />
 						<p>Criar molde</p>
 					</button>
 
-					<button
-						className="menu-button"
-						onClick={() => navigate("/pieceEnrollment")}>
+					<button className="menu-button" onClick={() => navigate("/piece")}>
 						<GiCookingPot />
 						<p>Criar peça</p>
 					</button>
 
 					<button
 						className="menu-button"
-						onClick={() => navigate("/moldPieceEnrollment")}>
+						onClick={() => navigate("/moldPiece")}>
 						<MdOutlineWidgets />
 						<p>Atribuir molde-peça</p>
 					</button>
 
 					<button
 						className="menu-button"
-						onClick={() => navigate("/employeesActions")}>
-						<FaUserCog />
-						<p>Listar/Editar Funcionario</p>
-					</button>
-
-					<button
-						className="menu-button"
-						onClick={() => navigate("/moldActions")}>
-						<div className="mold">
-							<PiCookingPotDuotone />
-						</div>
-						<div className="cog">
-							<FaCog />
-						</div>
-						<p>Listar/Editar Molde</p>
-					</button>
-
-					<button
-						className="menu-button"
-						onClick={() => navigate("/pieceActions")}>
-						<div className="mold">
-							<GiCookingPot />
-						</div>
-						<div className="cog">
-							<FaCog />
-						</div>
-						<p>Listar/Editar Peças</p>
-					</button>
-
-					<button
-						className="menu-button"
-						onClick={() => navigate("/moldPieceActions")}>
-						<div className="mold">
-							<MdOutlineWidgets />
-						</div>
-						<div className="cog">
-							<FaCog />
-						</div>
-						<p>Listar/Editar Molde/Peça</p>
-					</button>
-
-					<button
-						className="menu-button"
-						onClick={() => navigate("/productionOrdersActions")}>
+						onClick={() => navigate("/productionOrder")}>
 						<TbDatabaseCog />
 						<p>Listar/editar Ordens de produção</p>
 					</button>

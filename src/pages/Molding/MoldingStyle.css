@@ -1,9 +1,9 @@
 .moldingContainer {
   width: 100%;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: blue;
 }
 
 .moldingBox , .lastOrderDataBox {

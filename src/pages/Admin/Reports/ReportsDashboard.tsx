@@ -1,9 +1,9 @@
 import React from "react";
-import AluminiumLoss from "../../../components/TotalAluminumLossPerMold/AluminiumLoss";
 import Menu from "../../../components/Menu/Menu";
 import MoldQuantityPerProductionOrder from "../../../components/MoldesPerProductionOrder/MoldQuantityPerProductionOrder";
 import "./ReportsDashboardStyle.css";
-import ProductionByOperator from "../../../components/ProductionPer Operator/ProductionOrderByOperator";
+import ProductionByOperator from "../../../components/ProductionOrderComponents/ProductionPerOperator/ProductionOrderByOperator";
+import AluminiumLoss from "../../../components/ProductionOrderComponents/TotalAluminumLossPerMold/AluminiumLoss";
 
 function ReportsDashboard() {
 	return (
