@@ -70,9 +70,9 @@ function EmployeeEnrollment() {
 							value={sector}
 							onChange={(e) => setSector(e.target.value)}>
 							<option value="">Selecione um setor</option>
-							<option value="admin">Administrativo</option>
-							<option value="molding">Moldagem</option>
-							<option value="fusion">Fusão</option>
+							<option value="Administrativo">Administrativo</option>
+							<option value="Moldagem">Moldagem</option>
+							<option value="Fusão">Fusão</option>
 							<option value="Vazamento">Vazamento</option>
 							<option value="Jateamento">Jateamento</option>
 							<option value="Corte de canal">Corte de canal</option>
