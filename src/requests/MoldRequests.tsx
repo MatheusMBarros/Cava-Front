@@ -6,7 +6,7 @@ import {
 	UpdatedMoldType,
 } from "../types/MoldType";
 
-const url = "http://localhost:10000/mold";
+const url = "http://192.168.2.103:10000/mold";
 
 export const createMold = async ({
 	name,

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CreateMoldPieceType, ListMoldPieceType } from "../types/MoldPieceType";
 
-const url = "http://localhost:10000/moldPiece";
+const url = "http://192.168.2.103:10000/moldPiece";
 
 export async function createMoldPiece({
 	mold_fk,
@@ -79,7 +79,7 @@ export const fetchMoldPieceByMoldId = async (
 ): Promise<ListMoldPieceType[]> => {
 	try {
 		const response = await axios.get(
-			`http://localhost:10000/moldParts/${mold_fk}`
+			`http://192.168.2.103:10000/moldParts/${mold_fk}`
 		);
 		return response.data as ListMoldPieceType[];
 	} catch (error: any) {
@@ -93,7 +93,7 @@ export const totalAluminiumLossPerMold = async (
 ): Promise<number> => {
 	try {
 		const response = await axios.get(
-			`http://localhost:10000/aluminiumLoss/${mold_fk}`
+			`http://192.168.2.103:10000/aluminiumLoss/${mold_fk}`
 		);
 		return response.data;
 	} catch (error: any) {

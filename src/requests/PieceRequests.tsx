@@ -5,7 +5,7 @@ import {
 	UpdatePieceType,
 } from "../types/PieceType";
 
-const url = "http://localhost:10000/piece";
+const url = "http://192.168.2.103:10000/piece";
 export const createPiece = async ({
 	name,
 	handle_type,

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CreateEmployeeType, UpdateEmployeeType } from "../types/EmployeeType";
 
-const url = "http://localhost:10000/employee";
+const url = "http://192.168.2.103:10000/employee";
 
 export const createEmployee = async ({
 	name,

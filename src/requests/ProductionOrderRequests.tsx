@@ -6,8 +6,8 @@ import {
 	LastProductionOrderType,
 } from "../types/ProductionOrderTypes";
 
-const url = "http://localhost:10000/productionOrder";
-const lastOrderUrl = "http://localhost:10000/lastOrder";
+const url = "http://192.168.2.103:10000/productionOrder";
+const lastOrderUrl = "http://192.168.2.103:10000/lastOrder";
 
 export const createProductionOrder = async ({
 	initial_counter,
@@ -106,10 +106,10 @@ export const fetchProductionOrderById = async (id: number) => {
 		const { mold_fk, employee_fk } = productionOrderData;
 
 		const moldResponse = await axios.get(
-			`http://localhost:10000/mold/${mold_fk}`
+			`http://192.168.2.103:10000/mold/${mold_fk}`
 		);
 		const employeeResponse = await axios.get(
-			`http://localhost:10000/employee/${employee_fk}`
+			`http://192.168.2.103:10000/employee/${employee_fk}`
 		);
 
 		const moldData = moldResponse.data;
