@@ -12,7 +12,7 @@ function ListDeletePieces() {
 
 	useEffect(() => {
 		populatePices().catch((error) => console.log(error));
-	}, []);
+	}, [pieces]);
 
 	const populatePices = async () => {
 		const pieces = await fetchPiece();

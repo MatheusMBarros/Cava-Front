@@ -145,7 +145,7 @@ function EditProductionOrder() {
 					<button type="submit">Salvar</button>
 					<button
 						className="backButton"
-						onClick={() => navigate("/productionOrdersActions")}>
+						onClick={() => navigate("/productionOrder")}>
 						Voltar
 					</button>
 				</form>
