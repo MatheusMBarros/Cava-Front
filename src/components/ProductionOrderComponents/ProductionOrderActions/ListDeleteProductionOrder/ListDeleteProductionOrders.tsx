@@ -69,15 +69,6 @@ function ListDeleteProductionOrders() {
 		navigate(`/productionOrder/${id}`);
 	}
 
-	const formatDateTime = (date) => {
-		const year = date.getFullYear();
-		const month = (date.getMonth() + 1).toString().padStart(2, "0");
-		const day = date.getDate().toString().padStart(2, "0");
-		const hours = date.getHours().toString().padStart(2, "0");
-		const minutes = date.getMinutes().toString().padStart(2, "0");
-		return `${day}/${month}/${year} - ${hours}:${minutes}`;
-	};
-
 	// Sort productionOrders by ID
 	const sortedProductionOrders = [...productionOrders].sort(
 		(a, b) => a.id - b.id
@@ -109,10 +100,10 @@ function ListDeleteProductionOrders() {
 									<td>{productionOrder.initial_counter}</td>
 									<td>{productionOrder.final_counter}</td>
 									<td>
-										{formatDateTime(new Date(productionOrder.created_at))}
+										{new Date(productionOrder.created_at).toLocaleDateString()}
 									</td>
 									<td>
-										{formatDateTime(new Date(productionOrder.finished_at))}
+										{new Date(productionOrder.finished_at).toLocaleDateString()}
 									</td>
 									<td>{productionOrder.quantity}</td>
 									<td>{moldNames[productionOrder.mold_fk]}</td>
