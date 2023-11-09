@@ -16,6 +16,7 @@ export const createProductionOrder = async ({
 	mold_fk,
 	created_at,
 	description,
+	finished_at,
 }: CreateProductionOrderType) => {
 	try {
 		const response = await axios.post(url, {
@@ -25,6 +26,7 @@ export const createProductionOrder = async ({
 			employee_fk,
 			mold_fk,
 			description,
+			finished_at,
 		});
 		return response.data;
 	} catch (error) {
@@ -88,7 +90,7 @@ export const updateProductionOrder = async ({
 			final_counter,
 			employee_fk,
 			mold_fk,
-			updated_at: new Date(),
+			finished_at: new Date(),
 			description,
 		});
 		return response.data;
@@ -121,7 +123,7 @@ export const fetchProductionOrderById = async (id: number) => {
 			final_counter: productionOrderData.final_counter,
 			quantity: productionOrderData.quantity,
 			created_at: new Date(productionOrderData.created_at),
-			updated_at: new Date(productionOrderData.updated_at),
+			finished_at: new Date(productionOrderData.finished_at),
 			mold_fk: productionOrderData.mold_fk,
 			mold_name: moldData.name,
 			employee_fk: productionOrderData.employee_fk,
