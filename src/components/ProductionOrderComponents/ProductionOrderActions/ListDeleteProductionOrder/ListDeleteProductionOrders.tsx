@@ -112,7 +112,7 @@ function ListDeleteProductionOrders() {
 										{formatDateTime(new Date(productionOrder.created_at))}
 									</td>
 									<td>
-										{formatDateTime(new Date(productionOrder.updated_at))}
+										{formatDateTime(new Date(productionOrder.finished_at))}
 									</td>
 									<td>{productionOrder.quantity}</td>
 									<td>{moldNames[productionOrder.mold_fk]}</td>

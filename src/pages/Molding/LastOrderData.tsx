@@ -69,7 +69,6 @@ const LastOrderData: React.FC = () => {
 						disabled
 					/>
 					<label htmlFor="createdAt">Data de Criação</label>
-					<label htmlFor="createdAt">Data de Criação</label>
 					<input
 						type="text"
 						name="createdAt"

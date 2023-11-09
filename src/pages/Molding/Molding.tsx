@@ -23,9 +23,18 @@ const ProductionOrder: React.FC = () => {
 		number | null
 	>();
 	const [description, setDescription] = useState<string>("");
-	const [lastOrderData, setLastOrderData] = useState<any>(null);
+	const [finished_at, setFinishedAt] = useState<Date | null>(null);
 
 	useEffect(() => {
+		const savedOrderData = localStorage.getItem("productionOrderData");
+		if (savedOrderData) {
+			const parsedData = JSON.parse(savedOrderData);
+			setMoldId(parsedData.mold_fk);
+			setEmployeeFk(parsedData.employee_fk);
+			setInitialCounter(parsedData.initial_counter);
+			setOpenOrder(true);
+			setCreatedAt(parsedData.created_at);
+		}
 		populateSelectors();
 		lastCounter();
 	}, []);
@@ -45,66 +54,74 @@ const ProductionOrder: React.FC = () => {
 		setLastOrderFinalCounter(lastCounter);
 	};
 
-	const fetchLastOrderData = async () => {
-		try {
-			const lastOrderData = await fetchLastOrder();
-			setLastOrderData(lastOrderData);
-		} catch (error) {
-			console.error("Erro ao buscar os dados da última ordem:", error);
-		}
-	};
-
 	const openOrderValidation = () => {
-		setCreatedAt(new Date(-3));
+		const currentDateTime = new Date();
+		const currentDateTimeWithTimezone = new Date(
+			currentDateTime.getTime() - currentDateTime.getTimezoneOffset() * 60000
+		);
+
+		setCreatedAt(currentDateTimeWithTimezone);
 		setMoldId(mold_fk);
 		setEmployeeFk(employee_fk);
 		setInitialCounter(initial_counter);
 		setDescription(description);
-		if (initial_counter != lastOrderFinalCounter) {
+
+		if (initial_counter !== lastOrderFinalCounter) {
 			return alert(
 				"O contador inicial deve ser igual ao contador final da última ordem de produção!"
 			);
 		} else {
 			setOpenOrder(true);
+
+			// Save order data to localStorage
+			localStorage.setItem(
+				"productionOrderData",
+				JSON.stringify({
+					mold_fk,
+					employee_fk,
+					initial_counter,
+					created_at: currentDateTimeWithTimezone,
+				})
+			);
 		}
 	};
 
 	const closeOrderValidation = () => {
+		const currentDateTime = new Date();
+		const currentDateTimeWithTimezone = new Date(
+			currentDateTime.getTime() - currentDateTime.getTimezoneOffset() * 60000
+		);
+		setFinishedAt(currentDateTimeWithTimezone);
 		if (!final_counter) {
 			alert("Preencha todos os campos!");
+			return;
 		}
-		if (final_counter <= initial_counter!) {
+		if (final_counter <= initial_counter) {
 			alert("O contador final deve ser maior que o contador inicial!");
-		} else {
-			const productionOrder = {
-				initial_counter,
-				final_counter,
-				employee_fk,
-				mold_fk,
-				created_at,
-				description,
-			};
-
-			createProductionOrder(productionOrder)
-				.then(() => {
-					// Após a criação da ordem de produção, atualize os dados da última ordem
-					fetchLastOrderData();
-					alert("Ordem de produção criada com sucesso!");
-					setOpenOrder(false);
-				})
-				.catch((error) =>
-					console.error("Erro ao criar a ordem de produção:", error)
-				);
+			return;
 		}
-	};
 
-	const formatDateTime = (date: Date) => {
-		const year = date.getFullYear();
-		const month = date.getMonth().toString().padStart(2, "0");
-		const day = date.getDate().toString().padStart(2, "0");
-		const hours = date.getHours().toString().padStart(2, "0");
-		const minutes = date.getMinutes().toString().padStart(2, "0");
-		return `${year}-${month}-${day}T${hours}:${minutes}`;
+		const productionOrder = {
+			initial_counter,
+			final_counter,
+			employee_fk,
+			mold_fk,
+			created_at,
+			description,
+			finished_at: currentDateTimeWithTimezone,
+		};
+
+		createProductionOrder(productionOrder)
+			.then(() => {
+				alert("Ordem de produção criada com sucesso!");
+				setOpenOrder(false);
+			})
+			.catch((error) =>
+				console.error("Erro ao criar a ordem de produção:", error)
+			);
+
+		// Clear the saved order data in localStorage upon order completion
+		localStorage.removeItem("productionOrderData");
 	};
 
 	return (
@@ -122,7 +139,9 @@ const ProductionOrder: React.FC = () => {
 								<select
 									name="moldFk"
 									id="moldFk"
-									onChange={(event) => setMoldId(Number(event.target.value))}>
+									onChange={(event) => setMoldId(Number(event.target.value))}
+									value={mold_fk} // Define o valor selecionado
+								>
 									<option>Selecione um molde</option>
 									{molds.map((mold) => (
 										<option key={mold.id} value={mold.id}>
@@ -136,7 +155,9 @@ const ProductionOrder: React.FC = () => {
 									id="employeeFk"
 									onChange={(event) =>
 										setEmployeeFk(Number(event.target.value))
-									}>
+									}
+									value={employee_fk} // Define o valor selecionado
+								>
 									<option>Selecione um funcionário</option>
 									{employees.map((employee) => (
 										<option key={employee.id} value={employee.id}>
@@ -152,13 +173,7 @@ const ProductionOrder: React.FC = () => {
 									onChange={(event) =>
 										setInitialCounter(Number(event.target.value))
 									}
-								/>
-								<label htmlFor="createdAt">Data de Início</label>
-								<input
-									type="datetime-local"
-									name="createdAt"
-									id="createdAt"
-									value={formatDateTime(new Date())}
+									value={initial_counter} // Define o valor do contador inicial
 								/>
 								<button onClick={openOrderValidation}>Abrir Ordem</button>
 							</>
@@ -172,6 +187,7 @@ const ProductionOrder: React.FC = () => {
 									onChange={(event) =>
 										setFinalCounter(Number(event.target.value))
 									}
+									value={final_counter} // Define o valor do contador final
 								/>
 								<label htmlFor="description">Descrição</label>
 								<textarea
@@ -180,6 +196,7 @@ const ProductionOrder: React.FC = () => {
 									onChange={(event) => {
 										setDescription(event.target.value);
 									}}
+									value={description} // Define o valor da descrição
 								/>
 								<button onClick={closeOrderValidation}>Finalizar Ordem</button>
 							</>

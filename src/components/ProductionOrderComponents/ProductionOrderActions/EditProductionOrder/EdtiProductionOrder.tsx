@@ -49,14 +49,14 @@ function EditProductionOrder() {
 				final_counter: Number(event.target[1].value),
 				employee_fk: selectedEmployeeId,
 				mold_fk: selectedMoldId,
-				updated_at: new Date(),
+				finished_at: new Date(),
 				quantity: Number(event.target[1].value) - Number(event.target[0].value),
 				description: description,
 			};
 
 			await updateProductionOrder(updatedProductionOrder);
 			alert("Ordem de produção atualizada com sucesso!");
-			navigate("/productionOrdersActions");
+			navigate("/productionOrder");
 		} catch (error) {
 			console.log(error);
 		}
