@@ -36,7 +36,7 @@ const ProductionOrder: React.FC = () => {
 			setCreatedAt(parsedData.created_at);
 		}
 		populateSelectors();
-		lastCounter();
+		fetchLastOrder();
 	}, []);
 
 	const populateSelectors = async () => {
@@ -54,25 +54,24 @@ const ProductionOrder: React.FC = () => {
 		setLastOrderFinalCounter(lastCounter);
 	};
 
-	const openOrderValidation = () => {
-		const currentDateTime = new Date();
-		const currentDateTimeWithTimezone = new Date(
-			currentDateTime.getTime() - currentDateTime.getTimezoneOffset() * 60000
-		);
+	const openOrderValidation = async () => {
+		const ultimo = await verifyLastCounter();
 
-		setCreatedAt(currentDateTimeWithTimezone);
-		setMoldId(mold_fk);
-		setEmployeeFk(employee_fk);
-		setInitialCounter(initial_counter);
-		setDescription(description);
-
-		if (initial_counter !== lastOrderFinalCounter) {
-			return alert(
-				"O contador inicial deve ser igual ao contador final da última ordem de produção!"
+		if (ultimo !== initial_counter) {
+			alert("Os valores da ultima ordem não coinciden com estes");
+			return;
+		}
+		try {
+			const currentDateTime = new Date();
+			const currentDateTimeWithTimezone = new Date(
+				currentDateTime.getTime() - currentDateTime.getTimezoneOffset() * 60000
 			);
-		} else {
+			setCreatedAt(currentDateTimeWithTimezone);
+			setMoldId(mold_fk);
+			setEmployeeFk(employee_fk);
+			setInitialCounter(initial_counter);
+			setDescription(description);
 			setOpenOrder(true);
-
 			// Save order data to localStorage
 			localStorage.setItem(
 				"productionOrderData",
@@ -83,6 +82,8 @@ const ProductionOrder: React.FC = () => {
 					created_at: currentDateTimeWithTimezone,
 				})
 			);
+		} catch (error: any) {
+			alert(error);
 		}
 	};
 
@@ -114,13 +115,19 @@ const ProductionOrder: React.FC = () => {
 		createProductionOrder(productionOrder)
 			.then(() => {
 				alert("Ordem de produção criada com sucesso!");
+				console.log(productionOrder);
 				setOpenOrder(false);
 			})
 			.catch((error) =>
 				console.error("Erro ao criar a ordem de produção:", error)
 			);
+		setCreatedAt(currentDateTimeWithTimezone);
+		setMoldId(null);
+		setEmployeeFk(null);
+		setInitialCounter(null);
+		setDescription(``);
+		lastCounter();
 
-		// Clear the saved order data in localStorage upon order completion
 		localStorage.removeItem("productionOrderData");
 	};
 

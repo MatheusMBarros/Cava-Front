@@ -31,7 +31,7 @@ export const createProductionOrder = async ({
 		return response.data;
 	} catch (error) {
 		console.log(error);
-		return null;
+		throw new Error(error);
 	}
 };
 
